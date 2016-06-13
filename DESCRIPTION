@@ -1,0 +1,17 @@
+Package: cRimson
+Type: Package
+Title: Social Network Analysis from Crimson Hexagon Exports
+Version: 0.1.0
+Author: Craig Jolley
+Maintainer: Craig Jolley <cjolley.usaid@gmail.com>
+Description: Crimson Hexagon is great for a lot of things, but not social
+    network analysis. This package aims to fix that, by building on the igraph
+    library to construct, visualize, and analyze networks derived from social data.
+License: Haven't thought about that yet.
+LazyData: TRUE
+Imports:
+    ggplot2,
+    igraph,
+    tm,
+    XLConnect
+RoxygenNote: 5.0.1
