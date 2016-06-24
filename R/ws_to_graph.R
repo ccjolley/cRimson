@@ -9,19 +9,21 @@
 #'
 #' @param ws Data frame returned, for example, by get_ws()
 #'
-#' @export
 #' @examples
 #' library(dplyr)
-#' g <- get_ws('C:/Documents/CH_exports/','Posts.*xls') %>%
+#' g <- get_ws('data','GeoCenter 0524-1.xls') %>%
 #'     ws_to_graph()
+#'
+#' @author Craig Jolley, cjolley.usaid@gmail.com
 
+#' @export
 ws_to_graph <- function(ws){
   wsRT <- ws[grep("^RT ",ws$Contents),] # keep only retweets
   wsRT <- unique(wsRT)
   edges <- data.frame(rt=wsRT$Author,
                       orig=sapply(strsplit(wsRT$Contents,' '),
                                   function(x) gsub(':$','',x[2],perl=TRUE)))
-  graph.data.frame(edges,directed=TRUE)
+  igraph::graph.data.frame(edges,directed=TRUE)
 }
 
 

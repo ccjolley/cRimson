@@ -23,7 +23,47 @@
 #' repeated interactions would continue to boost your metric of choice.
 #'
 #' @examples
-#' Add examples here!
+#' library(dplyr)
+#' library(igraph)
+#' g <- get_ws('data','GeoCenter 0524-1.xls') %>%
+#'   ws_to_graph() %>%
+#'   graph_lcc()
+#' slist <- page.rank(g)$vector %>%
+#'   sort(decreasing=TRUE) %>%
+#'   head(100) %>%
+#'   names()
+#' new_g <- suggest_edge_series(g,'@USAID',betweenness,5,search_list=slist)
+#'
+#' @import igraph
+##############################################################################
+# Suggest a series of edges that will maximize metric at each step. This
+# should get us a more diverse set of suggested interaction partners than just
+# a single step.
+#
+# If unique = TRUE, don't suggest the same node more than once.
+###############################################################################
+#' @export
+suggest_edge_series <- function(g,n1,metric,num_steps,search_list=NULL,
+                                verbose=TRUE,uniq_n2=TRUE) {
+  if (is.null(search_list)) {
+    search_list <- V(g)$name
+  }
+  new_g <- g
+  if (verbose) {
+    print(paste('initial',get_metric(g,metric,n1),sep=': '))
+  }
+  for (i in 1:num_steps) {
+    n2_i <- suggest_edge(new_g,n1,metric,search_list,verbose=FALSE)
+    new_g <- new_g + edge(n1,n2_i)
+    if (uniq_n2) {
+      search_list <- search_list[search_list != n2_i]
+    }
+    if (verbose) {
+      print(paste(n2_i,get_metric(new_g,metric,n1),sep=': '))
+    }
+  }
+  new_g
+}
 
 ###############################################################################
 # Wrapper function
@@ -78,31 +118,4 @@ suggest_edge <- function(g,n1,metric,search_list=NULL,verbose=TRUE) {
   return(best_n2)
 }
 
-##############################################################################
-# Suggest a series of edges that will maximize metric at each step. This
-# should get us a more diverse set of suggested interaction partners than just
-# a single step.
-#
-# If unique = TRUE, don't suggest the same node more than once.
-###############################################################################
-suggest_edge_series <- function(g,n1,metric,num_steps,search_list=NULL,
-                                verbose=TRUE,uniq_n2=TRUE) {
-  if (is.null(search_list)) {
-    search_list <- V(g)$name
-  }
-  new_g <- g
-  if (verbose) {
-    print(paste('initial',get_metric(g,metric,n1),sep=': '))
-  }
-  for (i in 1:num_steps) {
-    n2_i <- suggest_edge(new_g,n1,metric,search_list,verbose=FALSE)
-    new_g <- new_g + edge(n1,n2_i)
-    if (uniq_n2) {
-      search_list <- search_list[search_list != n2_i]
-    }
-    if (verbose) {
-      print(paste(n2_i,get_metric(new_g,metric,n1),sep=': '))
-    }
-  }
-  new_g
-}
+

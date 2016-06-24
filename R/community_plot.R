@@ -17,10 +17,22 @@
 #' communities shown.
 #' @param extra Additional communities that should be highlighted.
 #'
-#' @export
 #' @examples
-#' Add examples here.
-
+#' library(dplyr)
+#' library(igraph)
+#' g <- get_ws('data','GeoCenter 0524-1.xls') %>%
+#'     ws_to_graph() %>%
+#'     graph_lcc()
+#' fg <- g %>%
+#'     as.undirected() %>%
+#'     simplify() %>%
+#'     fastgreedy.community()
+#' community_plot(g,fg)
+#'
+#' @import ggplot2
+#' @import RColorBrewer
+#' @import igraph
+#' @export
 community_plot <- function(g,c,n=8,layout=NULL,showMayors=TRUE,extra=NULL) {
   # plot a graph g using a community breakdown c
   # color in the first n communities

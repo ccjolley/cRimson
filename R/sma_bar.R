@@ -14,11 +14,14 @@
 #' @param extra A list of node names to be highlighted in addition to the
 #' top-ranked ones.
 #'
-#' @export
 #' @examples
-#' Add examples here.
+#' library(dplyr)
+#' get_ws('data','GeoCenter 0524-1.xls') %>%
+#'     ws_to_graph() %>%
+#'     sma_bar()
 
-
+#' @import igraph
+#' @export
 sma_bar <- function(g,n=8,highlight=NULL,extra=NULL) {
   if (is.null(highlight)) {  # use PageRank by default
     highlight <- page.rank(g)

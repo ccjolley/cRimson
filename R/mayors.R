@@ -13,13 +13,23 @@
 #' @param metric Function to use in determining influence within a community
 #' @param extra Additional communities whose mayors should be found.
 #'
-#' @export
 #' @examples
-#' Add examples here.
+#' library(dplyr)
+#' library(igraph)
+#' g <- get_ws('data','GeoCenter 0524-1.xls') %>%
+#'     ws_to_graph() %>%
+#'     graph_lcc()
+#' fg <- g %>%
+#'     as.undirected() %>%
+#'     simplify() %>%
+#'     fastgreedy.community()
+#' mayors(g,fg)
 
 ###############################################################################
+#' @import igraph
+#' @export
 mayors <- function(g,comm,n=8,metric=page.rank,extra=NULL) {
-  # for a community breakdown c of a graph g, return the mayors of the top n
+  # for a community breakdown comm of a graph g, return the mayors of the top n
   # communities
   if (max(membership(comm)) < n) {
     n <- max(membership(comm))

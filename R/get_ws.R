@@ -8,14 +8,16 @@
 #'
 #' Note that regex patterns are different from the glob (wildcard) patterns
 #' that many users are accustomed to!
-#' @export
 #' @examples
-#' ws <- get_ws('C:/Documents/CH_exports/','Posts.*xls')
+#' ws <- get_ws('data','GeoCenter 0524-1.xls')
 
-
+#' @export
 get_ws <- function(dir,patterns) {
+  old_dir <- getwd()
   setwd(dir)
   fnames <- unlist(sapply(patterns, function(x) list.files(pattern=x)))
   print(fnames)
-  ldply(fnames, function(x) XLConnect::readWorksheetFromFile(x,sheet=1))
+  res <- plyr::ldply(fnames, function(x) XLConnect::readWorksheetFromFile(x,sheet=1))
+  setwd(old_dir)
+  res
 }

@@ -9,13 +9,14 @@
 #'
 #' @param g igraph graph object.
 #'
-#' @export
 #' @examples
 #' library(igraph)
 #' g <- erdos.renyi.game(100,0.02)
 #' lcc <- graph_lcc(g)
 #' length(V(lcc))
 
+#' @import igraph
+#' @export
 graph_lcc <- function(g) {
   connected <- clusters(g,mode='weak')
   lcc_v <- V(g)[connected$membership==which.max(connected$csize)]

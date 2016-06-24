@@ -19,11 +19,16 @@
 #' @param extra A list of node names to be highlighted in addition to the
 #' top-ranked ones.
 #'
-#' @export
 #' @examples
-#' Add examples here.
+#' library(dplyr)
+#' get_ws('data','GeoCenter 0524-1.xls') %>%
+#'     ws_to_graph() %>%
+#'     graph_lcc() %>%
+#'     sma_plot()
 
-
+#' @import ggplot2
+#' @import RColorBrewer
+#' @export
 sma_plot <- function(g,n=8,highlight=NULL,layout=NULL,extra=NULL) {
   if (is.null(layout)) {
     layout <- layout.fruchterman.reingold(g)
