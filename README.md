@@ -48,7 +48,7 @@ The cRimson package also contains tools for the analysis and visualization of co
     
 ![sma_plot3](/img/sma_plot3.png)
 
-One way to capture what is happening in these communities is to find the "mayor" of each community -- the node that ranks the highest according to some graph metric (PageRank by default). To see exactly where these mayors are located in the network, use the `extra` argument in `sma_plot()` and `sma_bar()`:
+One way to capture what is happening in these communities is to find the "mayor" of each community -- the node that ranks the highest according to some graph metric (PageRank by default). To see exactly where these mayors are located in the network, use the `extra` argument in `sma_plot()` and `sma_bar()`. Note that color-coding is the same as in the plot above.
 
     m <- mayors(g,fg)
     sma_plot(g,extra=m)
