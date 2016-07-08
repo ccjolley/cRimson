@@ -4,3 +4,5 @@
 * make header for cluster_dtm.R
 * add @author line to all headers
 
+* It might be nice to have a version of sma_bar designed specifically for communities, with the same color-coding, that shows something like the mayor of the community or the most common terms.
+
