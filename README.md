@@ -9,3 +9,5 @@ Tools for social media analysis (together with Crimson Hexagon)
 `devtools::install_github("ccjolley/cRimson")`
 
 `library(cRimson)`
+
+More documentation coming soon...
