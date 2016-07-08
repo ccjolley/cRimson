@@ -1,0 +1,6 @@
+* Not clear how to export a single function from suggest_edge_series.R
+* make header for ws_to_dtm.R
+* make header for community_topics.R
+* make header for cluster_dtm.R
+* add @author line to all headers
+
