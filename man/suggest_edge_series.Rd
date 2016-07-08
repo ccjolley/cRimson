@@ -41,7 +41,7 @@ here!
 \examples{
 library(dplyr)
 library(igraph)
-g <- get_ws('data','GeoCenter 0524-1.xls') \%>\%
+g <- sample_tweets \%>\%
   ws_to_graph() \%>\%
   graph_lcc()
 slist <- page.rank(g)$vector \%>\%

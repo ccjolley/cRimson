@@ -19,6 +19,6 @@ This is just a wrapper function for XLConnect::readWorksheetFromFile()
 for easier importing of Excel data.
 }
 \examples{
-ws <- get_ws('data','GeoCenter 0524-1.xls')
+tweets <- get_ws('data','CH_export.xls')
 }
 

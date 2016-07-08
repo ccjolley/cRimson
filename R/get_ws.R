@@ -9,7 +9,7 @@
 #' Note that regex patterns are different from the glob (wildcard) patterns
 #' that many users are accustomed to!
 #' @examples
-#' ws <- get_ws('data','GeoCenter 0524-1.xls')
+#' tweets <- get_ws('data','CH_export.xls')
 
 #' @export
 get_ws <- function(dir,patterns) {

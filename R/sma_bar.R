@@ -16,7 +16,7 @@
 #'
 #' @examples
 #' library(dplyr)
-#' get_ws('data','GeoCenter 0524-1.xls') %>%
+#' sample_tweets %>%
 #'     ws_to_graph() %>%
 #'     sma_bar()
 
